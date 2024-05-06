@@ -6,63 +6,66 @@ import { getImageURL, serializeNonPOJOs } from '$lib/utils.ts';
 export const load = async ({ locals, params }) => {
     const getUser = async () => {
         const createFirstProject = async (user) => {
-            const firstProject = {
-                "title": "To-Do",
-                "accent_color": "#FFFFFF",
-                "createdy_by": user.id,
-                "team": [
-                    user.id
-                ],
-                "active": true,
-                "start_date": undefined,
-                "end_date": undefined,
-            };
+            try {
 
-            const firstProjectRecord = await locals.pb.collection('5_dot_projects').create(firstProject);
+                const firstProject = {
+                    "title": "To-Do",
+                    "accent_color": "#FFFFFF",
+                    "created_by": user.id,
+                    "team": [
+                        user.id
+                    ],
+                    "active": true,
+                    "start_date": undefined,
+                    "end_date": undefined,
+                    "tasks": [
+                        
+                    ]
+                };
+    
+                const firstProjectRecord = await locals.pb.collection('5_dot_projects').create(firstProject);
 
-            const userData = {
-                "projects": [
-                    firstProjectRecord.id
-                ],
-            };
-            
-            await locals.pb.collection('5_dot_users').update(user.id, userData);
+                try {
+                    const DotUserUpdatedData = {
+                        "projects": [
+                            firstProjectRecord.id
+                        ],
+                    };
+                    
+                    await locals.pb.collection('5_dot_users').update(user.id, DotUserUpdatedData);
+                    
+                } catch (error) {
+                    console.log("Error adding first project: ", error)
+                }
+                
+            } catch (error) {
+                console.log("Error creating first project: ", error)
+            }
         }
 
 
         try {
-            const user = await locals.pb.collection('5_dot_users').getFirstListItem(`username="${params.username}"`, {
+            locals.dotUser = await locals.pb.collection('5_dot_users').getFirstListItem(`username="${params.username}"`, {
                 expand: 'projects',
-            })
-
-            // console.log(user)
-            // console.log(user.projects.length)
-
-            if (user.projects.length == 0) {
-                // console.log("No Projects found, creating first project.")
-                // createFirstProject(user)
             }
+            );
 
-            locals.dotUser.profile_picture_url = locals.user.profile_picture ? getImageURL(locals.user.collectionId, locals.user.id, locals.user.profile_picture) : undefined
+            if (locals.dotUser.projects.length == 0) {
+                createFirstProject(locals.dotUser)
+            }
 
             return locals.dotUser;
         } catch (error) {
-            console.log("Error retrieving user")
+            console.log("Error retrieving Dot user")
         }
     };
 
     const getProjects = async () => {
         try {
-            const projects = await locals.pb.collection('5_dot_projects').getFullList(`created_by="${locals.dotUser.id}"`, {
+            const projects = await locals.pb.collection('5_dot_projects').getFullList({
+                filter: `created_by="${locals.dotUser.id}"`,
                 expand: 'tasks',
             });
-
-            // console.log(projects)
-            // projects.forEach(project => {
-            //     project.tasks.forEach(task => {
-            //         task = 
-            //     });
-            // });
 
             return projects;
         } catch (error) {
@@ -72,7 +75,8 @@ export const load = async ({ locals, params }) => {
 
     const getTasks = async () => {
         try {
-            const tasks = await locals.pb.collection('5_dot_tasks').getFullList(`created_by="${locals.dotUser.id}"`, {
+            const tasks = await locals.pb.collection('5_dot_tasks').getFullList({
+                filter: `created_by="${locals.dotUser.id}"`,
                 expand: 'project',
                 sort: 'checked, created',
             });

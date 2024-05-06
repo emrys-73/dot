@@ -6,8 +6,8 @@
     const pw = "Forgot my password :,("
   </script>
   
-  <div class="w-full lg:grid h-full min-h-screen lg:grid-cols-2">
-    <div class="flex items-center justify-center py-12">
+  <div class="w-full lg:grid h-full min-h-screen lg:grid-cols-2 dark:bg-gradient-to-b from-[#0c0b1f] to-[#000000]">
+    <div class="flex items-center justify-center py-12 h-full min-h-screen">
       <div class="mx-auto grid w-[350px] gap-6">
         <div class="grid gap-2 text-center">
           <h1 class="text-3xl font-bold">Login</h1>
@@ -38,11 +38,11 @@
         </div>
       </div>
     </div>
-    <div class="hidden bg-muted lg:block overflow-hidden h-full max-h-screen">
+    <div class="hidden bg-muted md:block overflow-hidden h-full max-h-screen">
       <img
         src="/ban.png"
         alt="placeholder"
-        class="h-full w-full object-cover dark:brightness-[0.9] dark:grayscale"
+        class="h-full w-full object-cover dark:brightness-[0.9]"
       />
     </div>
   </div>
