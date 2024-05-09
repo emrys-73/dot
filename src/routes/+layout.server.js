@@ -5,6 +5,7 @@
 import { getImageURL } from '$lib/utils.ts'
 
 export const load = async ({ locals }) => {
+    console.log("Hello world")
     const getPath = async () => {
         if (locals.user) {
             return `/${locals.user.username}`
