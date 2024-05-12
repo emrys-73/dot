@@ -183,7 +183,7 @@
     <div class="w-full h-1/5 md:h-1/6 z-0 bg-gradient-to-b from-transparent to-[#00000011] md:to-[#00000012] fixed bottom-0 "/>
     
     <form on:submit={handleSubmit} class="{!showAI ? 'hidden' : 'flex'} md:w-[60vw] w-[90vw] px-1 fixed bottom-4 backdrop-blur-md  bg-[#FFFFFF] z-50 altashadow-sm dark:bg-black bg-opacity-100 border-[1px] border-white border-opacity-40 h-10 rounded-full justify-between items-center flex-row altashadow-input ">
-        <input bind:value={$input} type="text" class="outline-none w-full flex rounded-full mx-1 px-3 placeholder:font-normal " placeholder="Ask anything">
+        <input bind:value={$input} type="text" class="outline-none w-full flex rounded-full mx-1 px-3 placeholder:font-normal bg-transparent dark:placeholder:text-white dark:placeholder:text-opacity-60  placeholder:text-black placeholder:text-opacity-60 " placeholder="Ask anything">
         <Button type="submit" class="rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
@@ -409,7 +409,7 @@
                                 </button>
                                 <input type="text" name="created_by" value={project.created_by} hidden>
                                 <input type="text" name="project" bind:value={project.id} hidden>
-                                <input type="text" name="title" placeholder="New Task" class=" placeholder: px-2 placeholder:opacity-60 text-black dark:text-white outline-none w-full">
+                                <input type="text" name="title" placeholder="New Task" class=" placeholder: px-2 placeholder:opacity-90 dark:placeholder:opacity-40 dark:placeholder:text-white text-black dark:text-white outline-none w-full bg-transparent">
                             </form>
                         </div>
                     </div>
