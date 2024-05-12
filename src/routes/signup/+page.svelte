@@ -4,7 +4,7 @@
     import { Label } from "$lib/components/ui/label/index";
   </script>
   
-  <div class="w-full lg:grid h-full min-h-screen lg:grid-cols-2 dark:bg-gradient-to-b from-[#0c0b1f] to-[#000406]">
+  <div class="w-full lg:grid h-full min-h-screen lg:grid-cols-2 dark:bg-black dark:bg-opacity-40 bg-white bg-opacity-90 backdrop-blur-lg">
     <div class="hidden bg-muted lg:block overflow-hidden h-full max-h-screen">
         <img
           src="/ban.png"

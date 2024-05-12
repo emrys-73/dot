@@ -3,7 +3,7 @@
 
 </script>
 
-<div class="w-full h-full min-h-screen flex flex-col justify-center items-center">
+<div class="w-full h-full min-h-screen flex flex-col justify-center items-center dark:bg-black dark:bg-opacity-40 bg-white bg-opacity-50 backdrop-blur-lg">
     <div class="w-80 h-full flex gap-4 flex-col">
 
        <span class="font-bold">

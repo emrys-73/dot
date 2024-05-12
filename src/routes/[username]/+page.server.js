@@ -4,6 +4,7 @@
 import { getImageURL, serializeNonPOJOs } from '$lib/utils.ts';
 
 export const load = async ({ locals, params }) => {
+    
     const getUser = async () => {
         const createFirstProject = async (user) => {
             try {
@@ -50,7 +51,9 @@ export const load = async ({ locals, params }) => {
             }
             );
 
+            // console.log("Retreived dot user")
             if (locals.dotUser.projects.length == 0) {
+                console.log("Creating first project")
                 createFirstProject(locals.dotUser)
             }
 
@@ -67,6 +70,9 @@ export const load = async ({ locals, params }) => {
                 expand: 'tasks',
             });
 
+            // console.log("Retreived projects")
+            // console.log(projects)
+
             return projects;
         } catch (error) {
             console.log("Error retrieving projects")
@@ -80,6 +86,10 @@ export const load = async ({ locals, params }) => {
                 expand: 'project',
                 sort: 'checked, created',
             });
+
+            // console.log("Retreived tasks")
+            locals.tasks = tasks
+            // console.log(tasks)
 
             return tasks
         } catch (error) {
@@ -116,12 +126,14 @@ export const actions = {
     addTask: async ({ request, locals }) => {
         try {
             const data = Object.fromEntries(await request.formData());
+            console.log("Creating new task")
+            console.log("Data: ", data)
 
             const newTask = {
                 "title": data.title,
                 "description": undefined,
                 "checked": false,
-                "created_by": data.created_by,
+                "created_by": locals.dotUser.id,
                 "project": data.project,
                 "start_date": undefined,
                 "end_date": undefined,
@@ -173,4 +185,27 @@ export const actions = {
             // Handle error if needed
         }
     },
+    clearChecked: async ({ request, locals }) => {
+        try {
+            console.log("Clearing checked tasks")
+
+            const allCheckedTasks = await locals.pb.collection('5_dot_tasks').getFullList({
+                filter: `created_by="${locals.dotUser.id}" && checked=true`,
+                sort: 'created',
+            });
+
+            console.log("Checked tasks: ", allCheckedTasks)
+
+            try {
+                allCheckedTasks.forEach(async (task) => {
+                    await locals.pb.collection('5_dot_tasks').delete(`${task.id}`);    
+                });
+            } catch (error) {
+                console.log("Error deleting individual tasks: ", error)
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 }

@@ -13,7 +13,7 @@
 
 <ModeWatcher />
 
-<div class="w-full h-full relative flex ">
+<div class="w-full h-full relative flex bg-[url('/lightbg.png')] dark:bg-[url('/darkbg.png')]">
   <div class="w-full h-16 bg-black bg-opacity-0 absolute top-0 z-30 justify-between px-4 flex drop-shadow-lg items-center">
   <div class="">
     <a href="{data.userPath}">

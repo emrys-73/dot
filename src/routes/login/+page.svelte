@@ -6,7 +6,7 @@
     const pw = "Forgot my password :,("
   </script>
   
-  <div class="w-full lg:grid h-full min-h-screen lg:grid-cols-2 dark:bg-gradient-to-b from-[#0c0b1f] to-[#000000]">
+  <div class="w-full lg:grid h-full min-h-screen lg:grid-cols-2 dark:bg-black dark:bg-opacity-40 bg-white bg-opacity-90 backdrop-blur-lg">
     <div class="flex items-center justify-center py-12 h-full min-h-screen">
       <div class="mx-auto grid w-[350px] gap-6">
         <div class="grid gap-2 text-center">

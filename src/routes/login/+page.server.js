@@ -14,8 +14,8 @@ const addToCookies = (data4cookies) => {
 let userPath = '/'
 
 export const load = async ({ locals, params }) => {
-    if (locals.user) {
-        throw redirect(303, locals.user?.username)
+    if (locals.pb.authStore.isValid && locals.dotUser) {
+        throw redirect(303, locals.dotUser?.username)
     }
 }
 
@@ -42,6 +42,7 @@ export const actions = {
 
         try {
             let user = await serializeNonPOJOs(await locals.pb.collection('users').authWithPassword(body.email, body.password)).record
+            locals.user = user
 
             // Skipping the verification test for now
 
@@ -50,6 +51,7 @@ export const actions = {
 
             try {
                 const dot_user = await serializeNonPOJOs(await locals.pb.collection('5_dot_users').getFirstListItem(`astralta_user="${user.id}"`))
+                locals.dotUser = dot_user
                 
                 userPath = `/${dot_user.username}/`
 

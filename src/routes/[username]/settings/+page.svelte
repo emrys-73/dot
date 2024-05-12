@@ -11,7 +11,9 @@
     import { useTransform, useViewportScroll } from "svelte-motion";
     import { Textarea } from "$lib/components/ui/textarea";
     import { enhance } from '$app/forms';
+    import { showBg } from "../../../stores";
     export let data;
+
 
     let loaded: boolean;
     $: loaded = false;
@@ -52,13 +54,13 @@
 <div class="w-full h-full min-h-screen justify-center items-center px-4 flex">
     {#if loaded}
     <div
-        transition:fly={{ delay: 0, duration: 2000 }}
+        transition:fly={{ delay: 0, duration: 1000 }}
          class="w-full h-full flex justify-center items-center py-20">
         <Card.Root 
             class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 transition-all duration-700 ease-in-out h-full">
             <Card.Header>
                 <Card.Title class="text-3xl">My Settings</Card.Title>
-                <Card.Description class="dark:text-white opacity-40 text-black">More settings available soon.</Card.Description>
+                <!-- <Card.Description class="dark:text-white opacity-40 text-black">More settings available soon.</Card.Description> -->
             </Card.Header>
             <Card.Content class="grid gap-4">
                 <div class="w-full h-full flex flex-row justify-between items-center transition-all duration-700 ease-in-out">
@@ -110,7 +112,21 @@
                         </div>
                     </form>
                 </div>
+<!-- 
+                <div class="w-full h-full justify-center items-center">
+                    <h2 class="text-2xl font-bold py-4">
+                        Appearance
+                    </h2>
 
+                    <Switch id="airplane-mode" />
+
+                </div> -->
+
+                <form action="/logout" method="POST" class="w-full h-full flex flex-col justify-center items-center">
+                    <Button type="submit" >
+                        Log Out
+                    </Button>
+                </form>
 
              
             </Card.Content>

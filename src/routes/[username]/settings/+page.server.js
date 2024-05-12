@@ -19,7 +19,8 @@ export const actions = {
                 "username": data.username,
             }
     
-            await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
+            locals.dotUser = await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
+            locals.user = await locals.pb.collection('users').update(locals.user.id, updatedUser);
         } catch (error) {
             console.log("Error: ", error)
         }
@@ -34,7 +35,8 @@ export const actions = {
                 "full_name": data.full_name,
             }
     
-            await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
+            locals.dotUser = await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
+            locals.user = await locals.pb.collection('users').update(locals.user.id, updatedUser);
         } catch (error) {
             console.log("Error: ", error)
         }
@@ -48,7 +50,7 @@ export const actions = {
                 "priorities": data.priorities,
             }
     
-            await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
+            locals.dotUser = await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
         } catch (error) {
             console.log("Error: ", error)
         }
@@ -62,7 +64,7 @@ export const actions = {
                 "info": data.info,
             }
     
-            await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
+            locals.dotUser = await locals.pb.collection('5_dot_users').update(locals.dotUser.id, updatedUser);
         } catch (error) {
             console.log("Error: ", error)
         }
